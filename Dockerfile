@@ -9,13 +9,13 @@ MAINTAINER CarbonSphere <CarbonSphere@gmail.com>
 ADD nginx.repo /etc/yum.repos.d/nginx.repo
 
 # Install nginx 
-RUN yum -y install nginx
+RUN yum -y install nginx; yum -y clean all
 
 # Install PHP
-RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common
+RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common; yum -y clean all
 
 # Install supervisor
-RUN yum install -y python-setuptools
+RUN yum install -y python-setuptools; yum -y clean all
 RUN easy_install pip
 RUN pip install supervisor
 

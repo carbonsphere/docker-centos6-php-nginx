@@ -12,6 +12,7 @@ ADD nginx.repo /etc/yum.repos.d/nginx.repo
 RUN yum -y install nginx; yum -y clean all
 
 # Install PHP
+RUN yum -y install php
 RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common; yum -y clean all
 
 # Install supervisor

@@ -16,6 +16,7 @@ ADD nginx.repo /etc/yum.repos.d/nginx.repo
 RUN yum -y install nginx; yum -y clean all
 
 # Install PHP
+RUN yum -y install php
 RUN yum -y --enablerepo=remi,remi-php56 install nginx php-fpm php-common; yum -y clean all
 RUN yum -y --enablerepo=remi,remi-php55 install php-cli php-pear php-pdo php-mysqlnd php-pgsql php-gd php-mbstring php-mcrypt php-xml; yum -y clean all
 
@@ -30,6 +31,9 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 
 # Add Supervisor configuration
 COPY supervisord.conf /etc/
+
+# Modify supervisor's require.txt
+RUN sed -i "s/meld3 >= 0.6.5/#meld3 >= 0.6.5/g" /usr/lib/python2.6/site-packages/supervisor-3.1.3-py2.6.egg-info/requires.txt
 
 # Insert default php index
 COPY index.php /var/www/index.php

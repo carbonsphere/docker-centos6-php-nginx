@@ -22,8 +22,8 @@ RUN yum -y --enablerepo=remi,remi-php55 install php-cli php-pear php-pdo php-mys
 
 # Install supervisor
 RUN yum install -y python-setuptools; yum -y clean all
-RUN easy_install pip && pip install --upgrade Distribute
-RUN pip install supervisor
+RUN easy_install pip 
+RUN pip install supervisor && pip install --upgrade Distribute
 
 # Add Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
